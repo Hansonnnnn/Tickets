@@ -1,0 +1,115 @@
+/*因为设置了affix*/
+.affix-top
+{
+    top:320px;
+    margin-top: 30px;
+    /*padding-left: 13px;*/
+    /*width: 213px;*/
+}
+.affix
+{
+    top:400px;
+    /*width: 213px;*/
+}
+.affix-bottom
+{
+    /*position: absolute;*/
+    /*width: 213px;*/
+    /*bottom: 500px;*/
+}
+#backLocationHelper_info, #backLocationHelper_requestList, #backLocationHelper_followersList, #backLocationHelper_storyList{
+    position: absolute;
+    margin-top: -70px;
+    width: 100%;
+    height: 50px;
+}
+
+#followersListBlock .portraitBlock{
+    margin-left: 5px;
+}
+#followersListBlock .listBlock .buttonBlock{
+    margin-top: 15px;
+}
+#followersListBlock .buttonBlock .followButton{
+    margin-left: 10px;
+}
+
+/*affix*/
+nav li>a, #backToLocator{
+    border-left: 3px solid #337ab7;
+}
+
+/*个人中心列表块样式*/
+/*个人中心、搜索结果页块样式*/
+.bigBlock{
+    border: 1px solid #EEEEEE;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 6px;
+}
+/*.bigBlock h4{*/
+    /*color: #696969;*/
+/*}*/
+.bigBlock .innerBigBlock{
+    margin-top: 70px;
+}
+/*分割线样式*/
+.hr {
+    height: 2px;
+    margin: 30px 0 20px 0;
+    background: rgba(255, 255, 255, .2);
+}
+.bigBlock .hr{
+    height:2px;
+    margin:0 0 20px 0;
+    background:rgba(232,232,232,.9);
+}
+.personalCenterMainBlock .leftBlock{
+    border: 1px solid #e8e8e8;
+    padding: 20px;
+}
+.personalCenterMainBlock .rightBlock{
+    padding-left: 40px;
+}
+.listBlock{
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #d5d5d5;
+    border-radius: 6px;
+}
+
+.listBlock .centerBlock{
+    /*margin-top: 20px;*/
+}
+.listBlock .buttonBlock{
+    margin-top: 20px;
+}
+/*.hr{*/
+    /*margin:0 0 10px 0;*/
+/*}*/
+/*返回顶部位置的坐标位置*/
+#backToLocator{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+#backToLocator:hover{
+    background-color: #EEEEEE;
+    text-decoration: none;
+}
+
+.stateTitle{
+    text-decoration: underline;
+}
+#unpaid .stateTitle{
+    color: #337ab7;
+}
+#finished .stateTitle{
+    color: #c74b57;
+}
+#unsubscribed .stateTitle{
+    color: #f0ad4e;
+}
+/*#refused .stateTitle{*/
+    /*color: #d9534f;*/
+/*}*/

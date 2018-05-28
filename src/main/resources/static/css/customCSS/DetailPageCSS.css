@@ -1,0 +1,28 @@
+.imageTestBlock{
+    width: 400px;
+    height: 540px;
+    background-color: #e8e8e8;
+}
+.detailPart{
+    padding-left: 30px;
+}
+
+.downEffect{
+    margin-top: 6px;
+}
+#myAlert{
+    top: 52px;
+    width: 100%;
+    height: 40px;
+    line-height: 10px;
+    position: absolute;
+}
+#myAlert button{
+    top: -8px;
+}
+#aPlan .modal-dialog, #bPlanModal .modal-dialog{
+    width: 1200px;
+}
+.selectedSeats span{
+    margin: 0 5px;
+}

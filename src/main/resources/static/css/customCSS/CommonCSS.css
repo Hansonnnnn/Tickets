@@ -1,0 +1,42 @@
+.locationRow{
+    margin-left: 70px;
+}
+.locationLabel{
+    margin-left: 20px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #cccccc;
+    color: #235ba6;
+}
+
+.hr{
+    height:2px;
+    margin:10px 0 10px 0;
+    background:rgba(232,232,232,.9);
+}
+.category{
+    padding: 20px 10px 20px 10px;
+}
+
+.blockBorder{
+    margin: 20px 20px 0 20px;
+    border: 1px solid #f3f3f3;
+    border-radius: 2px;
+    padding: 15px 0;
+}
+
+.testBlock{
+    margin: 10px;
+    height: 180px;
+    background-color: #00b3ee;
+}
+ul .active{
+
+}
+.disappear{
+    display: none;
+}
+.screen{
+    height: 40px;
+    background-color: #cfcfcf;
+}

@@ -1,0 +1,34 @@
+spring:
+#  mvc:
+#      view:
+#        prefix: /WEB-INF/jsp/
+#        suffix: .jsp
+  profiles:
+    active: prod
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/TicketsDB?useUnicode=true&characterEncoding=utf8&useSSL=true
+    username: root
+    password: xiezhenyu
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+
+
+
+application.hello: HelloAngel From application

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <link rel="stylesheet" href="../css/bootstrap-3.3.7/dist/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/customCSS/CommonCSS.css" type="text/css">
+    <link rel="stylesheet" href="../css/customCSS/PersonalCenterPageCSS.css" type="text/css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Tickets</a>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="alert alert-warning alert-dismissible fade" role="alert" id="topAlert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong></strong>
+    </div>
+    <div class="row personalCenterMainBlock">
+        <div class="col-md-10 col-md-offset-1">
+            <!--左侧部分-->
+            <div class="col-md-3">
+                <div class="row text-center leftBlock">
+                    <img src="https://cn-ali.muscache.com/im/pictures/user/b9b0d932-82a4-491f-b366-d08b38af2e02.jpg?aki_policy=profile_x_medium">
+                    <div class="hr"></div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6 text-right">
+                                <h4>欢迎你</h4>
+                            </div>
+                            <div class="col-md-6 text-left">
+                                <h4>Xie</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 text-right">
+                                <p>会员等级</p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="label label-primary">1</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 text-right">
+                                <p>积分</p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="label label-primary integralLabel" >1002</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <button class="btn btn-link">查看积分明细</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-link">查看优惠券</button>
+                            </div>
+                        </div>
+                        <div class="hr"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-default" id="editPortraitButton"><span class="glyphicon glyphicon-edit"></span>退出登录</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-danger" id="logoutButton"><span class="glyphicon glyphicon-off"></span>注销会员</button>
+                            </div>
+                        </div>
+
+                        <br>
+                        <br>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 scrollspy" role="complementary">
+                        <!--data-offset-bottom="300"-->
+                        <nav class="affix-top" data-spy="affix"  data-offset-top="220" >
+                            <ul class="nav hidden-xs hidden-sm">
+                                <li><a href="#backLocationHelper_info">我的个人资料</a></li>
+                                <li><a href="#backLocationHelper_ordersBlock">订单详情</a></li>
+                                <li><a href="#backLocationHelper_expensesBlock">我的消费情况</a></li>
+                                <li><a href="#backLocationHelper_integralsBlock">积分明细</a></li>
+                                <li><a href="#backLocationHelper_couponsBlock">我的优惠券</a></li>
+                                <!--<li><a href="#backLocationHelper_followersList"></a></li>-->
+                                <!--<li><a href="#backLocationHelper_storyList"></a></li>-->
+                            </ul>
+                            <a id="backToLocator" href="#backLocationHelper_info">返回顶部</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!--右侧部分-->
+            <div class="col-md-9 rightBlock">
+                <div id="backLocationHelper_info"></div>
+                <!--个人资料-->
+                <div class="row bigBlock" id="infoBlock">
+                    <div class="col-md-12">
+                        <h4>我的个人资料</h4>
+                    </div>
+                    <div class="hr col-md-12"></div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="userNameField">用户名</label>
+                            <div class="col-md-10">
+                                <input id="userNameField" type="text" class="form-control" placeholder="<%=information[0].username%>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="firstNameField">姓名</label>
+                            <div class="col-md-10">
+                                <input id="firstNameField" type="text" class="form-control" placeholder="<%=information[0].name%>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="telField">联系电话</label>
+                            <div class="col-md-10">
+                                <input id="telField" type="text" class="form-control" placeholder="<%=information[0].phone%>">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="button" class="btn btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="backLocationHelper_ordersBlock"></div>
+                <!--订单详情-->
+                <div class="row bigBlock" id="ordersBlock">
+                    <div class="col-md-12">
+                        <h4>订单详情</h4>
+                    </div>
+                    <div class="hr col-md-12"></div>
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist" id="requestTab">
+                            <li role="presentation" class="active"><a href="#unpaid" aria-controls="waited" role="tab" data-toggle="tab">待支付</a></li>
+                            <li role="presentation"><a href="#finished" aria-controls="ing" role="tab" data-toggle="tab">已购买</a></li>
+                            <li role="presentation"><a href="#unsubscribed" aria-controls="finished" role="tab" data-toggle="tab">已退订</a></li>
+                            <!--<li role="presentation"><a href="#refused" aria-controls="refused" role="tab" data-toggle="tab">被拒绝的YaoYue</a></li>-->
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active " id="unpaid">
+                                <div class="row listBlock">
+                                    <div class="col-md-12">
+                                        <div class="row topBlock">
+                                            <div class="col-md-4">
+                                                <p>订单编号: 199991231239</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>订单生成时间: 2018-9-10</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>支付时间: 2018-9-10</p>
+                                            </div>
+                                        </div>
+                                        <div class="hr"></div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4>2018-4-10 FOTILE方太·2018“薄雾里的晨钟”程璧新年演唱会</h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h4 class="stateTitle">待支付</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4>美琪大戏院 江苏省南京市</h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button class="btn btn-primary" type="button">支付</button>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-2">
+                                                <h4>总价</h4>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h4>1000</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>100元 * 4</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位: a区-1排-3号座、a区-1排-3号座、a区-1排-3号座、a区-1排-3号座</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>200元 * 2</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位: a区-1排-3号座、a区-1排-3号座</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row listBlock">
+                                    <div class="col-md-12">
+                                        <div class="row topBlock">
+                                            <div class="col-md-4">
+                                                <p>订单编号: 199991231239</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>订单生成时间: 2018-9-10</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>支付时间: 2018-9-10</p>
+                                            </div>
+                                        </div>
+                                        <div class="hr"></div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4>2018-4-10 FOTILE方太·2018“薄雾里的晨钟”程璧新年演唱会</h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h4 class="stateTitle">待支付</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <h4>美琪大戏院 江苏省南京市</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-2">
+                                                <h4>总价</h4>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h4>1000</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>100元 * 4</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位: a区-1排-3号座、a区-1排-3号座、a区-1排-3号座、a区-1排-3号座</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>200元 * 2</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位: a区-1排-3号座、a区-1排-3号座</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row listBlock">
+                                    <div class="col-md-12">
+                                        <div class="row topBlock">
+                                            <div class="col-md-4">
+                                                <p>订单编号: 199991231239</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>订单生成时间: 2018-9-10</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>支付时间: 2018-9-10</p>
+                                            </div>
+                                        </div>
+                                        <div class="hr"></div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4>2018-4-10 FOTILE方太·2018“薄雾里的晨钟”程璧新年演唱会</h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h4 class="stateTitle">待支付</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <h4>美琪大戏院 江苏省南京市</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-2">
+                                                <h4>总价</h4>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h4>1000</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>100元 * 4</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位: a区-1排-3号座、a区-1排-3号座、a区-1排-3号座、a区-1排-3号座</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>200元 * 2</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位: a区-1排-3号座、a区-1排-3号座</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="finished">
+                                <div class="row listBlock">
+                                    <div class="col-md-12">
+                                        <div class="row topBlock">
+                                            <div class="col-md-4">
+                                                <p>订单编号: 199991231239</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>订单生成时间: 2018-9-10</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>支付时间: 2018-9-10</p>
+                                            </div>
+                                        </div>
+                                        <div class="hr"></div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4>2018-4-10 FOTILE方太·2018“薄雾里的晨钟”程璧新年演唱会</h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h4 class="stateTitle">已支付</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4>美琪大戏院 江苏省南京市</h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <!--点击退订按钮之后，将该节点删除，已退订增加节点，后台刷新数据，
+                                                需要刷新哪些数据？1、支付宝余额   2、个人积分扣除   3、个人消费记录-->
+                                                <button class="btn btn-default unsubscribeButton" type="button">退订</button>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-2">
+                                                <h4>总价</h4>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h4>1000</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>100元 * 4</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位: a区-1排-3号座、a区-1排-3号座、a区-1排-3号座、a区-1排-3号座</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>200元 * 2</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位: a区-1排-3号座、a区-1排-3号座</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="unsubscribed">
+                                <div class="row listBlock">
+                                    <div class="col-md-12">
+                                        <div class="row topBlock">
+                                            <div class="col-md-4">
+                                                <p>订单编号: 199991231239</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>订单生成时间: 2018-9-10</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p>支付时间: 2018-9-10</p>
+                                            </div>
+                                        </div>
+                                        <div class="hr"></div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4>2018-4-10 FOTILE方太·2018“薄雾里的晨钟”程璧新年演唱会</h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h4 class="stateTitle">已退订</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4>美琪大戏院 江苏省南京市</h4>
+                                            </div>
+                                            <div class="col-md-2">
+
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-2">
+                                                <h4>总价</h4>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h4>1000</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>100元 * 4</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位: a区-1排-3号座、a区-1排-3号座、a区-1排-3号座、a区-1排-3号座</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>200元 * 2</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位: a区-1排-3号座、a区-1排-3号座</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="backLocationHelper_expensesBlock"></div>
+                <!--我的消费情况-->
+                <div class="row bigBlock" id="expensesBlock">
+                    <div class="col-md-12">
+                        <h4>我的消费情况</h4>
+                    </div>
+                    <div class="hr col-md-12"></div>
+                    <div class="innerBigBlock">
+                        <div class="row listBlock">
+                            <div class="col-md-2">
+                                <h5>2018-4-10</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5><span class="label label-primary">购买</span><span class="h5">   FOTILE方太·2018“薄雾里的晨钟”程璧新年演唱会</span></h5>
+                            </div>
+                            <div class="col-md-2">
+                                <h5>-100元</h5>
+                            </div>
+                        </div>
+                        <div class="row listBlock">
+                            <div class="col-md-2">
+                                <h5>2018-4-10</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5><span class="label label-primary">购买</span><span class="h5">   FOTILE方太·2018“薄雾里的晨钟”程璧新年演唱会</span></h5>
+                            </div>
+                            <div class="col-md-2">
+                                <h5>-100元</h5>
+                            </div>
+                        </div>
+                        <div class="row listBlock">
+                            <div class="col-md-2">
+                                <h5>2018-4-10</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5><span class="label label-primary">购买</span><span class="h5">   FOTILE方太·2018“薄雾里的晨钟”程璧新年演唱会</span></h5>
+                            </div>
+                            <div class="col-md-2">
+                                <h5>-100元</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="backLocationHelper_integralsBlock"></div>
+                <!--积分明细-->
+                <div class="row bigBlock" id="integralsBlock">
+                    <div class="col-md-2">
+                        <h4>积分明细</h4>
+                    </div>
+                    <div class="col-md-8">
+                        <h5 class="text-success">总积分:  <span class="label label-warning integralLabel">1002</span></h5>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#conversionRulesModal">兑换优惠券</button>
+                    </div>
+                    <div class="hr col-md-12"></div>
+                    <div class="innerBigBlock">
+                        <!--积分明细：支付时间、消费内容-退订、消费金额、积分变动-->
+                        <div class="row listBlock">
+                            <div class="col-md-2">
+                                <h5>2018-4-10</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5><span class="label label-primary">购买</span><span class="h5"> FOTILE方太·2018“薄雾里的晨钟”程璧新年演唱会</span><span> -100元</span></h5>
+                            </div>
+                            <div class="col-md-2">
+                                <h5>+10积分</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="backLocationHelper_couponsBlock"></div>
+                <!--优惠券：优惠金额-->
+                <div class="row bigBlock" id="couponsBlock">
+                    <div class="col-md-2">
+                        <h4>我的优惠券</h4>
+                    </div>
+                    <div class="col-md-2 col-md-offset-8">
+                        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#conversionRulesModal">兑换优惠券</button>
+                    </div>
+                    <div class="hr col-md-12"></div>
+                    <div class="innerBigBlock">
+                        <!--积分明细：支付时间、消费内容-退订、消费金额、积分变动-->
+                        <div class="row listBlock">
+                            <div class="col-md-12">
+                                <h5>满<span class="text-danger">1000</span> 减 <span class="text-danger">300</span></h5>
+                            </div>
+                        </div>
+                        <div class="row listBlock">
+                            <div class="col-md-12">
+                                <h5>满<span class="text-danger">1000</span> 减 <span class="text-danger">300</span></h5>
+                            </div>
+                        </div>
+                        <div class="row listBlock">
+                            <div class="col-md-12">
+                                <h5>满<span class="text-danger">1000</span> 减 <span class="text-danger">300</span></h5>
+                            </div>
+                        </div>
+                        <div class="row listBlock">
+                            <div class="col-md-12">
+                                <h5>满<span class="text-danger">1000</span> 减 <span class="text-danger">300</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="conversionRulesModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">兑换规则</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-11 col-md-offset-1">
+                        <h5>1.10积分兑换满99减10优惠券</h5>
+                        <h5>2.30积分兑换满99减30优惠券</h5>
+                        <h5>3.50积分兑换满199减50优惠券</h5>
+                        <h5>4.100积分兑换满499减100优惠券</h5>
+                        <p class="text-muted">说明: 兑换成功后请到个人中心"我的优惠券"</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-11 col-md-offset-1">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="numInput">兑换数量</label>
+                                <div class="col-md-6">
+                                    <!--<input type="number" id="numInput" class="form-control" placeholder="请输入兑换数量" min="0" step="10">-->
+                                    <select class="form-control" id="numInput">
+                                        <option>10</option>
+                                        <option>30</option>
+                                        <option>50</option>
+                                        <option>100</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary" type="button" id="exchangeButton">立即兑换</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+</body>
+<script src="../js/jQuery/jquery-3.2.1.min.js"></script>
+<script src="../css/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="../js/myJs/ShowWarningsAlertJS.js"></script>
+<script type="text/javascript">
+//    $('#requestTab a').click(function (e) {
+//        e.preventDefault();
+//        $(this).tab('show')
+//    });
+
+    var urlRoot = "http://localhost:3000";
+    function logout() {
+        $.ajax({
+            url: urlRoot + '/logout',
+            type:'GET', //GET
+            async:true,    //或false,是否异步
+            success: function (data) {
+                if(data.ret_code === 0){
+                    console.log("登出成功！");
+                    $(location).attr("href", "/");
+                }else{
+                    console.log("返回的数据失败");
+                }
+            },
+            error: function () {
+                console.log("登出失败");
+            }
+        })
+
+    }
+    $(function () {
+        $("#logoutButton").click(function (e) {
+            logout();
+        });
+
+        $("#exchangeButton").click(function () {
+            var num = $("#numInput option:selected").val();
+            //减少积分
+            var curValue = $(".integralLabel").eq(0).text();
+            curValue = "" + (parseInt(curValue) - parseInt(num));
+            console.log(curValue);
+            $(".integralLabel").text(curValue);
+
+            //添加优惠券
+            var appendNodeOne = "<div class=\"row listBlock\">\n" +
+                "                            <div class=\"col-md-12\">\n" +
+                "                                <h5>满 <span class=\"label label-primary\">";
+            var appendnodeTwo = "</span> 减 <span class=\"label label-danger\">";
+            var appendNodeThree = "</span></h5>\n" +
+                "                            </div>\n" +
+                "                        </div>";
+            var appendBlock = $("#couponsBlock").find(".innerBigBlock").eq(0);
+            var topValuesSet = [99, 199, 499];
+            var topValue = 0;
+            if(num === "10" || num === "30"){
+                topValue = topValuesSet[0];
+            }else if(num === "50"){
+                topValue = topValuesSet[1];
+            }else{
+                topValue = topValuesSet[2];
+            }
+            var wholeNode = appendNodeOne + topValue + appendnodeTwo + num + appendNodeThree;
+            appendBlock.append(wholeNode);
+
+            //关闭模态框
+            $('#conversionRulesModal').modal('hide');
+        });
+    })
+
+</script>
+</html>

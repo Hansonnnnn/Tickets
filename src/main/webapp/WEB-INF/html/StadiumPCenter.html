@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>场馆个人中心</title>
+    <link rel="stylesheet" href="../css/bootstrap-3.3.7/dist/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/customCSS/CommonCSS.css" type="text/css">
+    <style type="text/css">
+        .downEffect{
+            margin-top: 6px;
+        }
+        .assitButton, .editButton{
+            margin: 50px 0 0 60px;
+        }
+        h5 span{
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Tickets</a>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="alert alert-warning alert-dismissible fade" role="alert" id="topAlert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong></strong>
+    </div>
+    <div class="page-header">
+        <h1 id="welcomeText"></h1>
+    </div>
+    <div class="row blockBorder">
+        <div class="col-md-12">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="checkTicketField">请输入电子票编号</label>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" id="checkTicketField" placeholder="请输入电子票编号"/>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary" id="checkTicketButton">检票</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#stadiumManagementBlock" aria-controls="stadiumManagementBlock" role="tab" data-toggle="tab">场地管理</a></li>
+        <li role="presentation"><a href="#planManagementBlock" aria-controls="planManagementBlock" role="tab" data-toggle="tab">活动管理</a></li>
+        <li role="presentation"><a href="#statisticalDataBlock" aria-controls="statisticalDataBlock" role="tab" data-toggle="tab">统计信息</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="stadiumManagementBlock">
+            <div class="row blockBorder">
+                <div class="col-md-2">
+                    <div class="blockBorder text-center">
+                        <h1>T</h1>
+                    </div>
+
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">场馆名称</label>
+                                    <div class="col-md-10">
+                                        <input type="email" class="form-control" id="" placeholder="场馆名称" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">场馆地址</label>
+                                    <div class="col-md-10">
+                                        <input type="email" class="form-control" placeholder="场馆地点" disabled="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">最后修改时间</label>
+                                    <div class="col-md-3">
+                                        <label class="control-label">2018-03-06</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">审核状态</label>
+                                    <div class="col-md-3 downEffect">
+                                        <label><span class="label label-warning ">待审核</span></label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-1 text-center">
+                            <button type="button" class="btn btn-primary editButton">修改信息</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="row">-->
+                <!--<div class="col-md-10 col-md-offset-1">-->
+                    <!--<button type="button" class="btn btn-warning btn-block" style="margin-top: 20px"><span class="glyphicon glyphicon-plus"></span> 增加场馆</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div role="tabpanel" class="tab-pane" id="planManagementBlock">
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <button type="button" class="btn btn-default btn-block" id="addButton" style="margin-top: 20px"><span class="glyphicon glyphicon-plus"></span> 发布活动</button>
+                </div>
+            </div>
+    </div>
+        <div role="tabpanel" class="tab-pane" id="statisticalDataBlock">
+            <!--该区要显示的内容：预订情况、退订情况、财务情况（总收入）-->
+            <div class="row blockBorder">
+                <div class="col-md-2">
+                    <h3>总收入￥: </h3>
+                </div>
+                <div class="col-md-10" style="margin-top: 12px">
+                    <h4 class="text-danger">10903元</h4>
+                </div>
+                <div class="col-md-12">
+                    <!--如何显示预定情况--显示座位均为disabled，但是一些是打钩的，一些是空的，根据返回的数据来显示-->
+                    <ul class="nav nav-pills">
+                        <li role="presentation" class="active"><a href="#reservationBlock" data-toggle="tab">预订情况</a></li>
+                        <li role="presentation"><a href="#unsubscribedBlock" data-toggle="tab">退订情况</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" role="tabpanel" id="reservationBlock">
+                            <div class="row blockBorder">
+                                <div class="col-md-3">
+                                    <h5 style="margin-left: 130px;">订单生成时间</h5>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>演出名称</h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5>订单金额</h5>
+                                </div>
+                            </div>
+                            <div class="row blockBorder">
+                                <div class="col-md-3">
+                                    <h5>2018-03-31 09:39:27</h5>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>【演唱会】金玟岐2018“大七电台”全国巡回演唱会-深圳站 </h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5>1800</h5>
+                                </div>
+                            </div>
+                            <div class="row blockBorder">
+                                <div class="col-md-3">
+                                    <h5>2018-03-31 09:39:27</h5>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>【演唱会】金玟岐2018“大七电台”全国巡回演唱会-深圳站 </h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5>1800</h5>
+                                </div>
+                            </div>
+                            <div class="row blockBorder">
+                                <div class="col-md-3">
+                                    <h5>2018-03-31 09:39:27</h5>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5>【演唱会】金玟岐2018“大七电台”全国巡回演唱会-深圳站 </h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5>1800</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" role="tabpanel" id="unsubscribedBlock">
+                            <div class="row blockBorder">
+                                <div class="col-md-3">
+                                    <h5>2018年12月1日</h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5>xxx 退订了</h5>
+                                </div>
+                                <div class="col-md-7">
+                                    <h5><span class="label label-danger">1区2排2座</span>
+                                        <span class="label label-danger">1区2排2座</span>
+                                        <span class="label label-danger">1区2排2座</span>
+                                        <span class="label label-danger">1区2排2座</span>
+                                        <span class="label label-danger">1区2排2座</span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+<script src="../js/jQuery/jquery-3.2.1.min.js"></script>
+<script src="../css/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+<script src="../js/myJs/ShowWarningsAlertJS.js"></script>
+<script src="../js/myJs/SeatsConfigJS.js"></script>
+<script type="text/javascript">
+    $(function () {
+        /**
+         * 设置欢迎信息
+         **/
+        function randomString(len) {
+            len = len || 32;
+            var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+            var maxPos = $chars.length;
+            var pwd = '';
+            for (var i = 0; i < len; i++) {
+                pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+            }
+            return pwd;
+        }
+        var welcomeText = "尊敬的：" + randomString(4) + " 用户，您好！" + "<small>请记住您的用户名，登录时使用。</small>";
+        $("#welcomeText").html(welcomeText);
+
+        $(".editButton").click(function () {
+            var type = $(this).text();
+            if(type === "修改信息"){
+                $(this).parent().prev().find("input").attr("disabled", false);
+                $(this).text("保存");
+            }else{
+                $(this).parent().prev().find("input").attr("disabled", true);
+                $(this).text("修改信息");
+            }
+        });
+
+        var seatsSettingResult = [];
+        $("#aSubmitButton").click(function () {
+            seatsSettingResult = planSeatsSubmit("a");
+            $("#aPlan").addClass("disappear");
+            var label = $("#aPlan").prev().prev().children().eq(1).children().eq(0).children().eq(0).children().eq(0).children().eq(4).children().eq(1).find("span").eq(0);
+            label.removeClass("label-warning");
+            label.addClass("label-success");
+            label.text("已设置");
+//            console.log(result);
+        });
+        $("#bSubmitButton").click(function () {
+            seatsSettingResult = planSeatsSubmit("b");
+            $("#bPlan").addClass("disappear");
+            var label = $("#bPlan").prev().prev().children().eq(1).children().eq(0).children().eq(0).children().eq(0).children().eq(4).children().eq(1).find("span").eq(0);
+            label.removeClass("label-warning");
+            label.addClass("label-success");
+            label.text("已设置");
+        });
+
+
+        var aSelectedBlock = [];
+        var bSelectedBlock = [];
+        var aPriceAreaLabel = ["a","b","c","d","e","f","g","h","i"];
+        var bPriceAreaLabel = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p"];
+        var type = "a";//or "b"
+
+        /**
+         * 思路：
+         * 一跳转到这个界面，所有的座位全在，但是都没打对勾，并且座位图隐藏----后台自动按照前一个界面的座位勾选情况绘制座位
+         * 绘制过程：
+         * 1.a区，找到a块，设置其[x，y]位，为显示or不显示（设置其css属性visibility）--不是是否勾选，而是是否显示
+         * 2.传递过来的数据；就是最初生成的格式，在此界面对每个元素进行解析
+         * 3.怎样解析每个元素？目前已经拿到分割开的数据, 0区,0行,0列,1
+         *   0区找到a_0块---》找到其下面所有行，找到0行---》找到0列---》按照value值设置其visibility属性
+         * 点击"设置（座位）"按钮，将其显示
+         *
+         *
+         * 现在的思路是：先把所有的checkbox取出来，再放到二维数组里面，再按照元素坐标去设置每个checkbox
+         */
+        //添加的结构是怎样的？
+        function drawSeats() {
+            //取到结构框架的元素
+            //a方案
+            var aPlan = $("#aPlan");
+            //area set
+            var a_area_set = aPlan.find(".seatsBlock").eq(0).find(".areaBlock");
+            //row set
+            var a_area_rows_set;
+            //col set----数据结构是怎么组织的？
+            var a_area_cols_set;
+            //元素组成的二维数组
+            var a_area_ele_set = [];
+//            tempSet[0] = [];
+            for(var i = 0;i < a_area_set.length;i++){
+                a_area_rows_set = a_area_set.eq(i).find(".row");
+                var tempSet = [];
+                for(var j = 0;j < a_area_rows_set.length-1;j++){
+                    tempSet[j] = [];
+                    a_area_cols_set = a_area_rows_set.eq(j).find("input[type='checkbox']");
+                    for(var k = 0;k < a_area_cols_set.length;k++){
+                        tempSet[j][k] = a_area_cols_set.eq(k);
+                    }
+                }
+                a_area_ele_set[i] = tempSet;
+            }
+//            console.log(a_area_ele_set);
+            //a方案
+            var bPlan = $("#bPlan");
+            var b_area_set = bPlan.find(".seatsBlock").eq(0).find(".areaBlock");
+            //row set
+            var b_area_rows_set;
+            //col set----数据结构是怎么组织的？
+            var b_area_cols_set;
+            //元素组成的二维数组
+            var b_area_ele_set = [];
+//            tempSet[0] = [];
+            for(var i = 0;i < b_area_set.length;i++){
+                b_area_rows_set = b_area_set.eq(i).find(".row");
+                var tempSet = [];
+                for(var j = 0;j < b_area_rows_set.length-1;j++){
+                    tempSet[j] = [];
+                    b_area_cols_set = b_area_rows_set.eq(j).find("input[type='checkbox']");
+                    for(var k = 0;k < b_area_cols_set.length;k++){
+                        tempSet[j][k] = b_area_cols_set.eq(k);
+                    }
+                }
+                b_area_ele_set[i] = tempSet;
+            }
+            //数据结构[区号,[行号,[列号，是否已经被勾选(0 or 1)]]]
+//            var xyData = [
+//                //a-1-n
+//                [0,[0,[0, 1]]],[0,[0,[1, 1]]],[0,[0,[2, 1]]],[0,[0,[3, 1]]],[0,[0,[4, 1]]],[0,[0,[5, 1]]],
+//                [0,[0,[6, 1]]],[0,[0,[7, 1]]],[0,[0,[8, 1]]],
+//                //a-2-n
+//                [0,[1,[0, 1]]],[0,[1,[1, 1]]],[0,[1,[2, 1]]],[0,[1,[3, 1]]],[0,[1,[4, 1]]],[0,[1,[5, 1]]],
+//                [0,[1,[6, 1]]],[0,[1,[7, 1]]],
+//                //b-1-n
+//                [1,[0,[0, 1]]],[1,[0,[1, 1]]],[1,[0,[2, 1]]],[1,[0,[3, 1]]],[1,[0,[4, 1]]],[1,[0,[5, 1]]],
+//                [1,[0,[6, 1]]],[1,[0,[7, 1]]],[1,[0,[8, 1]]]
+//            ];
+            var xyData = [
+                //a
+                "0-0-0-0","0-0-1-1","0-0-2-1","0-0-3-1","0-0-4-1","0-0-5-1","0-0-6-1","0-0-7-1","0-0-8-1",
+                "0-1-0-1","0-1-1-1","0-1-2-1","0-1-3-1","0-1-4-1","0-1-5-1","0-1-6-1","0-1-7-1","0-1-8-1",
+                //b
+                "1-0-0-1","1-0-1-1","1-0-2-1","1-0-3-1","1-0-4-1","1-0-5-1","1-0-6-1","1-0-7-1","1-0-8-1",
+                "1-1-0-1","1-1-1-1","1-1-2-1","1-1-3-1","1-1-4-1","1-1-5-1","1-1-6-1","1-1-7-1","1-1-8-1"
+            ];
+
+            var cur_ele;
+            var cur_ele_data;
+            var blockNum = 0;
+            var rowNum = 0;
+            var colNum = 0;
+            var value = 0;
+
+           for(var i = 0;i < xyData.length;i++){
+               cur_ele_data = xyData[i];
+               blockNum = cur_ele_data.substr(0,1);
+               rowNum = cur_ele_data.substr(2,1);
+               colNum = cur_ele_data.substr(4,1);
+               value = cur_ele_data.substr(6,1);
+               if(value === "0"){
+                   cur_ele = a_area_ele_set[blockNum][rowNum][colNum];
+                   cur_ele.css("visibility", "hidden");
+                   cur_ele.attr("disabled", true);
+               }
+           }
+        }
+        drawSeats();
+
+
+        /**
+         * 设置增加活动按钮事件
+         **/
+        var planBlock = "<div class=\"row blockBorder\">\n" +
+            "                <div class=\"row\">\n" +
+            "                    <div class=\"col-md-2\">\n" +
+            "                        <div class=\"blockBorder text-center\">\n" +
+            "                            <h1 class=\"imgLogo\">T</h1>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                    <div class=\"col-md-8\">\n" +
+            "                        <div class=\"row\">\n" +
+            "                            <div class=\"col-md-11\">\n" +
+            "                                <form class=\"form-horizontal\">\n" +
+            "                                    <div class=\"form-group\">\n" +
+            "                                        <label class=\"col-md-2 control-label\">活动名称</label>\n" +
+            "                                        <div class=\"col-md-10\">\n" +
+            "                                            <input type=\"text\" class=\"form-control\" id=\"\" placeholder=\"活动名称\" disabled=\"\">\n" +
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                    <div class=\"form-group\">\n" +
+            "                                        <label class=\"col-md-2 control-label\">活动时间</label>\n" +
+            "                                        <div class=\"col-md-10\">\n" +
+            "                                            <input type=\"date\" class=\"form-control\" placeholder=\"活动时间\" disabled=\"\">\n" +
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                    <div class=\"form-group\">\n" +
+            "                                        <label class=\"col-md-2 control-label\">活动类型</label>\n" +
+            "                                        <div class=\"col-md-10\">\n" +
+            "                                            <input type=\"text\" class=\"form-control\" placeholder=\"类型\" disabled=\"\">\n" +
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                    <div class=\"form-group\">\n" +
+            "                                        <label class=\"col-md-2 control-label\">活动描述</label>\n" +
+            "                                        <div class=\"col-md-10\">\n" +
+            "                                            <textarea class=\"form-control\" rows=\"3\" disabled=\"\" placeholder=\"活动描述\"></textarea>\n" +
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                    <div class=\"form-group\">\n" +
+            "                                        <label class=\"col-md-2 control-label\">座位安排状态</label>\n" +
+            "                                        <div class=\"col-md-3 downEffect\">\n" +
+            "                                            <label><span class=\"label label-warning \">未安排</span></label>\n" +
+            "                                        </div>\n" +
+            "                                        <div class=\"col-md-1\">\n" +
+            "                                            <button type=\"button\" class=\"btn btn-default btn-sm setSeatsBtn\">设置</button>\n" +
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                    <div class=\"form-group\">\n" +
+            "                                        <label class=\"col-md-2 control-label\">票价制定状态</label>\n" +
+            "                                        <div class=\"col-md-3 downEffect\">\n" +
+            "                                            <label><span class=\"label label-warning \">未制定</span></label>\n" +
+            "                                        </div>\n" +
+            "                                        <div class=\"col-md-1\">\n" +
+            "                                            <button type=\"button\" class=\"btn btn-default btn-sm setPriceBtn\">设置</button>\n" +
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                </form>\n" +
+            "                            </div>\n" +
+            "                            <div class=\"col-md-1 text-center\">\n" +
+            "                                <button type=\"button\" class=\"btn btn-primary assitButton\">修改信息</button>\n" +
+            "                            </div>\n" +
+            "                        </div>\n" +
+            "                    </div>\n" +
+            "                </div>\n" +
+            "                <div class=\"row blockBorder disappear\">\n" +
+            "                    <div class=\"col-md-4 col-md-offset-4 text-center\">\n" +
+            "                        <h3 class=\"text-muted\">价格制定</h3>\n" +
+            "                        <div class=\"hr\"></div>\n" +
+            "                        <form class=\"form-horizontal\">\n" +
+            "\n" +
+            "                        </form>\n" +
+            "                        <div class=\"hr\"></div>\n" +
+            "                        <button type=\"button\" class=\"btn btn-primary priceSubmitButton\">完成</button>\n" +
+            "                    </div>\n" +
+            "                </div>\n" +
+            "            </div>";
+        $("#addButton").click(function () {
+            //先去判断场馆审核状态，如果为"待审核"，则不能发布活动，弹出警告框
+            var status = $("#staStatusLabel").text();
+            if(status === "待审核"){
+                showTopAlert("场馆待管理员审核通过之后才能发布活动，我们会尽快为您处理！")
+            }else{
+                $(planBlock).insertBefore($(this).parent().parent());
+                $(".assitButton").click(function () {
+                    var type = $(this).text();
+                    if(type === "修改信息"){
+                        $(this).parent().prev().find("input").attr("disabled", false);
+                        $(this).parent().prev().find("textarea").attr("disabled", false);
+                        $(this).text("保存");
+                    }else{
+                        $(this).parent().prev().find("input").attr("disabled", true);
+                        $(this).parent().prev().find("textarea").attr("disabled", true);
+                        $(this).text("修改信息");
+                    }
+                });
+
+                $(".setSeatsBtn").click(function () {
+                    var appendNode;
+                    if(type === "a"){
+                        appendNode = $("#aPlan");
+                    }else{
+                        appendNode = $("#bPlan");
+                    }
+                    appendNode.removeClass("disappear");
+                    $(this).parent().parent().parent().parent().parent().parent().parent().parent().append(appendNode);
+
+
+                });
+
+
+                var priceBlock = "<div class=\"form-group\">\n" +
+                    "                    <label class=\"col-md-2 control-label area_num\"></label>\n" +
+                    "                    <div class=\"col-md-10\">\n" +
+                    "                        <div class=\"input-group\">\n" +
+                    "                            <span class=\"input-group-addon\">￥</span>\n" +
+                    "                            <input type=\"number\" class=\"form-control\" aria-label=\"Amount (to the nearest dollar)\">\n" +
+                    "                            <span class=\"input-group-addon\">元</span>\n" +
+                    "                        </div>\n" +
+                    "                    </div>\n" +
+                    "                </div>";
+                $(".setPriceBtn").click(function () {
+                    var thisButton = $(this);
+                    var state = thisButton.parent().parent().prev().children().eq(1).children().eq(0).children().text();
+                    if(state === "未安排"){
+                        showTopAlert("请先安排座位，再进行设置价格！")
+                    }else{
+                        //遍历数据
+                        var cur_ele;
+                        var cur_ele_data;
+                        var blockNum = 0;
+                        var rowNum = 0;
+                        var colNum = 0;
+                        var value = 0;
+                        for(var i = 0;i < seatsSettingResult.length;i++){
+                            cur_ele_data = seatsSettingResult[i];
+                            blockNum = cur_ele_data.substr(0,1);
+                            rowNum = cur_ele_data.substr(2,1);
+                            colNum = cur_ele_data.substr(4,1);
+                            value = cur_ele_data.substr(6,1);
+                            if(value === "1"){
+                                markBlock(blockNum);
+                            }
+                        }
+                        function markBlock(blockNum) {
+                            if(type === "a"){
+                                if(aSelectedBlock.indexOf(blockNum) === -1){
+                                    aSelectedBlock.push(blockNum);
+                                }
+                            }else{
+                                if(bSelectedBlock.indexOf(blockNum) === -1){
+                                    bSelectedBlock.push(blockNum);
+                                }
+                            }
+
+                        }
+                        var selectedBlock;
+                        var priceAreaLabelSet;
+                        if(type === "a"){
+                            selectedBlock = aSelectedBlock;
+                            priceAreaLabelSet = aPriceAreaLabel;
+                        }else{
+                            selectedBlock = bSelectedBlock;
+                            priceAreaLabelSet = bPriceAreaLabel;
+                        }
+                        //整个大块，有disappear类的块
+                        var bigBlock = thisButton.parent().parent().parent().parent().parent().parent().parent().next();
+                        var appendArea;
+                        for(var i = 0;i < selectedBlock.length;i++){
+                            appendArea = bigBlock.children().eq(0).children().eq(2);
+                            appendArea.append(priceBlock);
+                            appendArea.children().eq(-1).children().eq(0).text("" + priceAreaLabelSet[selectedBlock[i]] + " 区");
+                        }
+                        bigBlock.removeClass("disappear");
+                        thisButton.prop("disabled", true);
+
+                        //为"完成"按钮设置事件
+                        $(".priceSubmitButton").click(function () {
+                            var priceItemsSet = $(this).prev().prev().children();
+                            var resultMap = [];
+                            for(var m = 0;m < priceItemsSet.length;m++){
+                                var cur_item = priceItemsSet.eq(m);
+                                var itemNum = cur_item.children().eq(0).text().substr(0,1);
+                                var itemPrice = cur_item.children().eq(1).children().eq(0).children().eq(1).val();
+                                resultMap[m] = "" + itemNum + "-" + itemPrice;
+                            }
+//                            console.log(resultMap);
+                            //将价格模块收起
+                            bigBlock.addClass("disappear");
+                            //找到价格设置状态标签，设置其为已设置---是否要有待审核？
+                            var newStatusLabel = "<label><span class=\"label label-warning \">待审核</span></label>";
+                            var priceStatusLabel = $(this).parent().parent().prev().children().eq(1).children().eq(0).children().eq(0).children().eq(0).children().eq(5).find("span").eq(0);
+                            priceStatusLabel.removeClass("label-warning");
+                            priceStatusLabel.addClass("label-success");
+                            priceStatusLabel.text("已设置");
+                            priceStatusLabel.parent().parent().append(newStatusLabel);
+                            thisButton.prop("disabled", false);
+                        })
+                    }
+                });
+            }
+        });
+    })
+</script>
+</html>

@@ -1,0 +1,19 @@
+.locationUnitHolder button{
+    color: #7c7c8c;
+    margin: 5px 5px;
+}
+.locationUnitHolder button span{
+    color: #f53a5f;
+}
+.locationUnitHolder .badge{
+    background-color: #337ab7;
+}
+.locationModal{
+    padding: 5px 20px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+}
+
+button.close{
+    padding-top: 5px;
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>TicketsManager个人中心</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-3.3.7/dist/css/bootstrap.min.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/customCSS/CommonCSS.css}" type="text/css" />
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Tickets</a>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#auditBlock" aria-controls="home" role="tab" data-toggle="tab">场馆审核</a></li>
+        <li role="presentation"><a href="#settleBlock" aria-controls="profile" role="tab" data-toggle="tab">账务结算</a></li>
+        <li role="presentation"><a href="#statisticsBlock" aria-controls="messages" role="tab" data-toggle="tab">全站信息统计</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="auditBlock">
+            <div class="row blockBorder">
+                <div class="col-md-1 text-center">
+                    <h5>场馆编号</h5>
+                </div>
+                <div class="col-md-2  text-center">
+                    <h5>场馆名称</h5>
+                </div>
+                <div class="col-md-3  text-center">
+                    <h5>场馆位置</h5>
+                </div>
+                <div class="col-md-2  text-center">
+                    <h5>申请时间</h5>
+                </div>
+                <div class="col-md-1  text-center">
+                    <h5>座位区类型</h5>
+                </div>
+                <div class="col-md-1 text-center">
+                    <h5>审核状态</h5>
+                </div>
+                <div class="col-md-1  text-center">
+                    <h5>通过审核</h5>
+                </div>
+                <div class="col-md-1  text-center">
+                    <h5>拒绝通过</h5>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="settleBlock">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row blockBorder">
+                        <div class="col-md-2 text-center">
+                            <h5>订单编号</h5>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h5>下单时间</h5>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h5>用户编号</h5>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h5>场馆名称</h5>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h5>订单金额</h5>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h5>结算操作</h5>
+                        </div>
+                    </div>
+                    <div class="row blockBorder" th:each="ticket : ${ticketList}">
+                        <div class="col-md-2 text-center">
+                            <h5 th:text="${ticket.id}"></h5>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h5 th:text="${ticket.createDate}"></h5>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h5 th:text="${ticket.userId}"></h5>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h5 th:text="${ticket.stadiumName}"></h5>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <h5 th:text="${ticket.totalPrice}">订单金额</h5>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <button type="button" class="btn btn-default settleButton">结算</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="statisticsBlock">
+            <div class="row blockBorder">
+                <!--左边是页头，右边是tab-->
+                <div class="col-md-3">
+                    <div class="page-header">
+                        <h3>场馆信息统计 <small></small></h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills" style="margin-top: 30px;">
+                        <li role="presentation" class="active"><a href="#reserveTabPanel" data-toggle="tab">预订/退订情况</a></li>
+                        <li role="presentation"><a href="#revenueTabPanel" data-toggle="tab">订单收入情况</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-12">
+                    <div class="tab-content">
+                        <div class="tab-pane active" role="tabpanel" id="reserveTabPanel" style="width: 600px;height: 600px;">
+                            <!--<div class="row blockBorder">-->
+                                <!--<div id=""></div>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="tab-pane" role="tabpanel" id="revenueTabPanel" style="width: 600px;height: 600px;">
+                            <!--<div class="row blockBorder">-->
+
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row blockBorder">
+                <div class="col-md-3">
+                    <div class="page-header">
+                        <h3>会员信息统计 <small></small></h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills" style="margin-top: 30px;">
+                        <li role="presentation" class="active"><a href="#userLevelTabPanel" data-toggle="tab">会员等级分布情况</a></li>
+                        <!--<li role="presentation"><a href="#revenueTabPanel" data-toggle="tab">会员注册时间情况</a></li>-->
+                    </ul>
+                </div>
+                <div class="col-md-12">
+                    <div class="tab-content">
+                        <div class="tab-pane active" role="tabpanel" id="userLevelTabPanel" style="width: 600px;height: 600px;">
+                            <!--<div class="row blockBorder">-->
+                            <!--<div id=""></div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script th:src="@{/js/jQuery/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/css/bootstrap-3.3.7/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/lib/echarts.js}"></script>
+<script th:src="@{/js/myJs/UtilJs.js}"></script>
+<script th:src="@{/js/myJs/TicketsManagerPCPageJS.js}"></script>
+</html>

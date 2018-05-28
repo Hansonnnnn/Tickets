@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分类列表</title>
+    <link rel="stylesheet" href="../css/bootstrap-3.3.7/dist/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/customCSS/CommonCSS.css" type="text/css">
+    <link rel="stylesheet" href="../css/customCSS/LoginPageCSS.css" type="text/css">
+    <style type="text/css">
+        .logoBlock{
+            margin: 10px;
+            width: 120px;
+            height: 160px;
+            background-color: #e8e8e8;
+        }
+        .detailPart{
+            padding-left: 30px;
+            margin-top: 7px;
+        }
+        .detailPart a{
+            color: #edb838;
+            cursor: pointer;
+        }
+        .detailPart p{
+            margin-top: 5px;
+            margin-left: 3px;
+            font: normal bold 14px/20px arial,sans-serif;
+            color: #7c7c8c;
+        }
+        .detailPart p.priceItem{
+            font-size: 16px;
+            color: #edb838;
+            /*color: #337ab7;*/
+        }
+        .detailPart span{
+            font-size: 14px;
+            color: #cecdcc;
+        }
+        .myTestBlock{
+            margin: 10px;
+            height: 180px;
+            background-color: #EEEEEE;
+        }
+        .outerBlock{
+            /*margin: 20px 20px 0 20px;*/
+            border: 1px solid #cccccc;
+            border-radius: 2px;
+            box-shadow: 5px 5px 10px 0 #e9ecef;
+        }
+        .outerBlock:hover{
+            box-shadow: 1px 1px 10px 5px #cfcfcf;
+        }
+        .hr{
+            background-color: #f3f3f3;
+        }
+        .conditionItem{
+            margin-top: 18px;
+        }
+        .conditionItem .col-md-1{
+            text-align: center;
+        }
+        .conditionItem button{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Tickets</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <form class="navbar-form navbar-left" >
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" style="width: 300px;">
+                </div>
+                <button type="submit" class="btn btn-default">搜索</button>
+            </form>
+            <button type="button" class="btn btn-primary navbar-btn navbar-right" style="margin-right: 1px" data-toggle="modal" data-target="#loginModal">登录/注册</button>
+        </div>
+    </div>
+</nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <h3 style="margin: 5px 0 0 20px;">演唱会</h3>
+            </div>
+            <div class="col-md-10" style="margin-left: -90px">
+                <button type="button" class="btn btn-link btn-lg"><span class="glyphicon glyphicon-map-marker"></span> 上海</button>
+            </div>
+        </div>
+
+        <div class="row blockBorder">
+            <div class="col-md-12">
+                <!--放置筛选条件模块-->
+                <div class="row conditionItem">
+                    <div class="col-md-1">
+                        <h4>分类</h4>
+                    </div>
+                    <div class="col-md-11">
+                        <button type="button" class="btn btn-default">全部</button>
+                        <button type="button" class="btn btn-default">演唱会</button>
+                        <button type="button" class="btn btn-default">音乐会</button>
+                        <button type="button" class="btn btn-default">话剧/歌剧</button>
+                        <button type="button" class="btn btn-default">体育比赛</button>
+                        <button type="button" class="btn btn-default">电子竞赛</button>
+                    </div>
+                </div>
+                <div class="hr"></div>
+                <div class="row conditionItem">
+                    <div class="col-md-1">
+                        <h4>风格</h4>
+                    </div>
+                    <div class="col-md-11">
+                        <button type="button" class="btn btn-default">全部</button>
+                        <button type="button" class="btn btn-default">流行</button>
+                        <button type="button" class="btn btn-default">民族</button>
+                        <button type="button" class="btn btn-default">摇滚</button>
+                        <button type="button" class="btn btn-default">音乐节</button>
+                    </div>
+                </div>
+                <div class="hr"></div>
+                <div class="row conditionItem">
+                    <div class="col-md-1">
+                        <h4>时间</h4>
+                    </div>
+                    <div class="col-md-11">
+                        <button type="button" class="btn btn-default">全部</button>
+                        <button type="button" class="btn btn-default">今天</button>
+                        <button type="button" class="btn btn-default">一周内</button>
+                        <button type="button" class="btn btn-default">一个月内</button>
+                        <button type="button" class="btn btn-default">三个月内</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row blockBorder">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs" style="margin: 10px 0;">
+                    <li role="presentation" class="active"><a href="#">热度最高</a></li>
+                    <li role="presentation"><a href="#">最近开场</a></li>
+                    <li role="presentation"><a href="#">最新上架</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <div class="outerBlock">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="logoBlock"></div>
+                        </div>
+                        <div class="col-md-8 detailPart">
+                            <h5><a>【上海】林肯爵士乐上海中心 “The Immortal Stage: Best Of Broadway” Patrick Bartley Quartet with The Ladybugs</a></h5>
+                            <p><span class="glyphicon glyphicon-calendar"></span> 2018.02.13</p>
+                            <p><span class="glyphicon glyphicon-map-marker"></span> 林肯爵士乐上海中心 - 上海</p>
+                            <p class="priceItem"><span class="glyphicon glyphicon-yen"></span> 180-308元</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="outerBlock">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="logoBlock"></div>
+                        </div>
+                        <div class="col-md-8 detailPart">
+                            <h5><a>【上海】林肯爵士乐上海中心 “The Immortal Stage: Best Of Broadway” Patrick Bartley Quartet with The Ladybugs</a></h5>
+                            <p><span class="glyphicon glyphicon-calendar"></span> 2018.02.13</p>
+                            <p><span class="glyphicon glyphicon-map-marker"></span> 林肯爵士乐上海中心 - 上海</p>
+                            <p class="priceItem"><span class="glyphicon glyphicon-yen"></span> 180-308元</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="outerBlock">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="logoBlock"></div>
+                        </div>
+                        <div class="col-md-8 detailPart">
+                            <h5><a>【上海】林肯爵士乐上海中心 “The Immortal Stage: Best Of Broadway” Patrick Bartley Quartet with The Ladybugs</a></h5>
+                            <p><span class="glyphicon glyphicon-calendar"></span> 2018.02.13</p>
+                            <p><span class="glyphicon glyphicon-map-marker"></span> 林肯爵士乐上海中心 - 上海</p>
+                            <p class="priceItem"><span class="glyphicon glyphicon-yen"></span> 180-308元</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

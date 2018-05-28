@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>个人中心</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-3.3.7/dist/css/bootstrap.min.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/customCSS/CommonCSS.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/customCSS/LoginPageCSS.css}" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/customCSS/PersonalCenterPageCSS.css}" type="text/css"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Tickets</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search" id="searchInput" style="width: 300px;" />
+                    </div>
+                    <button type="button" class="btn btn-default" onclick="">搜索</button>
+                </form>
+                <ul class="nav navbar-nav">
+                    <li class=""><a id="stadiumSignIn">场馆登录/注册 <span class="sr-only">(current)</span></a></li>
+                </ul>
+                <button id="personCenterButton" type="button" class="btn btn-default navbar-btn navbar-right disappear" style="margin-right: 1px" ><span class="glyphicon glyphicon-user"></span> 个人中心</button>
+                <button th:alt="${session.username}" id="loginButton" type="button" class="btn btn-primary navbar-btn navbar-right" style="margin-right: 1px" data-toggle="modal" data-target="#loginModal">登录/注册</button>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container-fluid">
+    <div class="alert alert-warning alert-dismissible fade" role="alert" id="topAlert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong></strong>
+    </div>
+    <div class="row personalCenterMainBlock">
+        <div class="col-md-10 col-md-offset-1">
+            <!--左侧部分-->
+            <div class="col-md-3">
+                <div class="row text-center leftBlock">
+                    <img src="https://cn-ali.muscache.com/im/pictures/user/b9b0d932-82a4-491f-b366-d08b38af2e02.jpg?aki_policy=profile_x_medium"/>
+                    <div class="hr"></div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6 text-right">
+                                <h4>欢迎你</h4>
+                            </div>
+                            <div class="col-md-6 text-left">
+                                <h4 th:text="${user.username}"></h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 text-right">
+                                <p>会员等级</p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="label label-primary" th:text="${user.VIPLevel}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 text-right">
+                                <p>积分</p>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="label label-primary integralLabel" th:text="${user.integral}"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <button class="btn btn-link">查看积分明细</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-link">查看优惠券</button>
+                            </div>
+                        </div>
+                        <div class="hr"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-default" id="logoutButton"><span class="glyphicon glyphicon-edit"></span>退出登录</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-danger" id="stopVIPButton"><span class="glyphicon glyphicon-off"></span>注销会员</button>
+                            </div>
+                        </div>
+
+                        <br/>
+                        <br/>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 scrollspy" role="complementary">
+                        <!--data-offset-bottom="300"-->
+                        <nav class="affix-top" data-spy="affix"  data-offset-top="220" >
+                            <ul class="nav hidden-xs hidden-sm">
+                                <li><a href="#backLocationHelper_info">我的个人资料</a></li>
+                                <li><a href="#backLocationHelper_ordersBlock">订单详情</a></li>
+                                <li><a href="#backLocationHelper_expensesBlock">我的消费情况</a></li>
+                                <li><a href="#backLocationHelper_integralsBlock">积分明细</a></li>
+                                <li><a href="#backLocationHelper_couponsBlock">我的优惠券</a></li>
+                                <!--<li><a href="#backLocationHelper_followersList"></a></li>-->
+                                <!--<li><a href="#backLocationHelper_storyList"></a></li>-->
+                            </ul>
+                            <a id="backToLocator" href="#backLocationHelper_info">返回顶部</a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!--右侧部分-->
+            <div class="col-md-9 rightBlock">
+                <div id="backLocationHelper_info"></div>
+                <!--个人资料-->
+                <div class="row bigBlock" id="infoBlock">
+                    <div class="col-md-12">
+                        <h4>我的个人资料</h4>
+                    </div>
+                    <div class="hr col-md-12"></div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="userNameField">用户名</label>
+                            <div class="col-md-10">
+                                <input id="userNameField" type="text" class="form-control" th:placeholder="${user.username}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="passwordField">密码</label>
+                            <div class="col-md-10">
+                                <input id="passwordField" type="text" class="form-control" placeholder="******************"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button type="button" class="btn btn-primary" id="editPersonalInfoBtn">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="backLocationHelper_ordersBlock"></div>
+                <!--订单详情-->
+                <div class="row bigBlock" id="ordersBlock">
+                    <div class="col-md-12">
+                        <h4>订单详情</h4>
+                    </div>
+                    <div class="hr col-md-12"></div>
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist" id="requestTab">
+                            <li role="presentation" class="active"><a href="#unpaid" aria-controls="waited" role="tab" data-toggle="tab">待支付</a></li>
+                            <li role="presentation"><a href="#finished" aria-controls="ing" role="tab" data-toggle="tab">已购买</a></li>
+                            <li role="presentation"><a href="#unsubscribed" aria-controls="finished" role="tab" data-toggle="tab">已撤销</a></li>
+                            <li role="presentation"><a href="#canceled" aria-controls="refused" role="tab" data-toggle="tab">已取消</a></li>
+                            <li role="presentation"><a href="#checked" aria-controls="refused" role="tab" data-toggle="tab">已检票</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade in active " id="unpaid">
+                                <div class="row listBlock" th:each="ticket : ${unpaidTicketsList}">
+                                    <div class="col-md-12">
+                                        <div class="row topBlock">
+                                            <div class="col-md-4">
+                                                <p>订单编号:<span th:text="${ticket.id}"></span></p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>订单生成时间:<span th:text="${ticket.createDate}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="hr"></div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4  th:text="${ticket.planDate + ticket.planName}"></h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h4 class="stateTitle">待支付</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.stadiumName + ticket.location}"></h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <button class="btn btn-primary pcPayButton" type="button">支付</button>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-2">
+                                                <h4>总价</h4>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.totalPrice}"></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-2">
+                                                        <h4>100元 * 4</h4>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <h5>座位:<span th:text="${ticket.seatsAndPrices}"></span></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="finished">
+                                <div class="row listBlock" th:each="ticket : ${finishedTicketsList}">
+                                    <div class="col-md-12">
+                                        <div class="row topBlock">
+                                            <div class="col-md-4">
+                                                <p>订单编号:<span th:text="${ticket.id}"></span></p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>订单生成时间:<span th:text="${ticket.createDate}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="hr"></div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.planDate + ticket.planName}"></h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h4 class="stateTitle">已支付</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.stadiumName + ticket.location}"></h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <!--点击退订按钮之后，将该节点删除，已退订增加节点，后台刷新数据，
+                                                需要刷新哪些数据？1、支付宝余额   2、个人积分扣除   3、个人消费记录-->
+                                                <button class="btn btn-default unsubscribeButton" type="button">退订</button>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-2">
+                                                <h4>总价</h4>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.totalPrice}"></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-12">
+                                                        <h5>座位:<span th:text="${ticket.seatsAndPrices}"></span></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="unsubscribed">
+                                <div class="row listBlock" th:each="ticket : ${subTicketsList}">
+                                    <div class="col-md-12">
+                                        <div class="row topBlock">
+                                            <div class="col-md-4">
+                                                <p>订单编号:<span th:text="${ticket.id}"></span></p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>订单生成时间:<span th:text="${ticket.createDate}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="hr"></div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.planDate + ticket.planName}"></h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h4 class="stateTitle">已撤销</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.stadiumName + ticket.location}"></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-2">
+                                                <h4>总价</h4>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.totalPrice}"></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-12">
+                                                        <h5>座位:<span th:text="${ticket.seatsAndPrices}"></span></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="canceled">
+                                <div class="row listBlock" th:each="ticket : ${canceledTicketsList}">
+                                    <div class="col-md-12">
+                                        <div class="row topBlock">
+                                            <div class="col-md-4">
+                                                <p>订单编号:<span th:text="${ticket.id}"></span></p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>订单生成时间:<span th:text="${ticket.createDate}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="hr"></div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.planDate + ticket.planName}"></h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h4 class="stateTitle">已取消</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.stadiumName + ticket.location}"></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-2">
+                                                <h4>总价</h4>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.totalPrice}"></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-12">
+                                                        <h5>座位:<span th:text="${ticket.seatsAndPrices}"></span></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="checked">
+                                <div class="row listBlock" th:each="ticket : ${checkedTicketsList}">
+                                    <div class="col-md-12">
+                                        <div class="row topBlock">
+                                            <div class="col-md-4">
+                                                <p>订单编号:<span th:text="${ticket.id}"></span></p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p>订单生成时间:<span th:text="${ticket.createDate}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="hr"></div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.planDate + ticket.planName}"></h4>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h4 class="stateTitle">已检票</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.stadiumName + ticket.location}"></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-2">
+                                                <h4>总价</h4>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <h4 th:text="${ticket.totalPrice}"></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row centerBlock">
+                                            <div class="col-md-12">
+                                                <div class="row ticketItem">
+                                                    <div class="col-md-12">
+                                                        <h5>座位:<span th:text="${ticket.seatsAndPrices}"></span></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="backLocationHelper_expensesBlock"></div>
+                <!--我的消费情况-->
+                <div class="row bigBlock" id="expensesBlock">
+                    <div class="col-md-12">
+                        <h4>我的消费情况</h4>
+                    </div>
+                    <div class="hr col-md-12"></div>
+                    <div class="innerBigBlock">
+                        <div class="row listBlock" th:each="consumption : ${consumptionList}">
+                            <div class="col-md-2">
+                                <h5 th:text="${consumption.date}"></h5>
+                            </div>
+                            <div class="col-md-8">
+                                <h5><span class="label label-primary" th:text="${consumption.type}"></span><span class="h5" th:text="${consumption.planName}"></span></h5>
+                            </div>
+                            <div class="col-md-2">
+                                <h5 th:text="${consumption.totalPrice}"></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div id="backLocationHelper_integralsBlock"></div>-->
+                <!--&lt;!&ndash;积分明细&ndash;&gt;-->
+                <!--<div class="row bigBlock" id="integralsBlock">-->
+                    <!--<div class="col-md-2">-->
+                        <!--<h4>积分明细</h4>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-8">-->
+                        <!--<h5 class="text-success">总积分:  <span class="label label-warning integralLabel">1002</span></h5>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-2">-->
+                        <!--<button class="btn btn-default" type="button" data-toggle="modal" data-target="#conversionRulesModal">兑换优惠券</button>-->
+                    <!--</div>-->
+                    <!--<div class="hr col-md-12"></div>-->
+                    <!--<div class="innerBigBlock">-->
+                        <!--&lt;!&ndash;积分明细：支付时间、消费内容-退订、消费金额、积分变动&ndash;&gt;-->
+                        <!--<div class="row listBlock">-->
+                            <!--<div class="col-md-2">-->
+                                <!--<h5>2018-4-10</h5>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-8">-->
+                                <!--<h5><span class="label label-primary">购买</span><span class="h5"> FOTILE方太·2018“薄雾里的晨钟”程璧新年演唱会</span><span> -100元</span></h5>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-2">-->
+                                <!--<h5>+10积分</h5>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <div id="backLocationHelper_couponsBlock"></div>
+                <!--优惠券：优惠金额-->
+                <div class="row bigBlock" id="couponsBlock">
+                    <div class="col-md-2">
+                        <h4>我的优惠券</h4>
+                    </div>
+                    <div class="col-md-2 col-md-offset-8">
+                        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#conversionRulesModal">兑换优惠券</button>
+                    </div>
+                    <div class="hr col-md-12"></div>
+                    <div class="innerBigBlock">
+                        <!--积分明细：支付时间、消费内容-退订、消费金额、积分变动-->
+                        <div class="row listBlock" th:each="coupon : ${couponList}">
+                            <div class="col-md-12">
+                                <h5>满 <span class="text-danger" th:text="${coupon.upperLimit}"></span> 减 <span class="text-danger" th:text="${coupon.discount}"></span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--兑换优惠券模态框-->
+<div class="modal fade" id="conversionRulesModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">兑换规则</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-11 col-md-offset-1">
+                        <h5>1.100积分兑换满100减20优惠券</h5>
+                        <h5>2.300积分兑换满300减60优惠券</h5>
+                        <h5>3.500积分兑换满500减130优惠券</h5>
+                        <h5>4.100积分兑换满1000减300优惠券</h5>
+                        <p class="text-muted">说明: 兑换成功后请到个人中心"我的优惠券"</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-11 col-md-offset-1">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="numInput">兑换数量</label>
+                                <div class="col-md-6">
+                                    <!--<input type="number" id="numInput" class="form-control" placeholder="请输入兑换数量" min="0" step="10">-->
+                                    <select class="form-control" id="numInput">
+                                        <option>100</option>
+                                        <option>300</option>
+                                        <option>500</option>
+                                        <option>1000</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-primary" type="button" id="exchangeButton">立即兑换</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+<!--登录对话层-->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="login-wrap">
+            <div class="login-html">
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked = "checked"/><label for="tab-1" class="tab">Sign In</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up"/><label for="tab-2" class="tab">Sign Up</label>
+                <div class="login-form">
+                    <div class="sign-in-htm">
+                        <div class="group">
+                            <label for="sign-in-email-field" class="label">邮箱 Email</label>
+                            <input id="sign-in-email-field" type="text" class="input"/>
+                        </div>
+                        <div class="group">
+                            <label for="sign-in-password-field" class="label">密码 Password</label>
+                            <input id="sign-in-password-field" type="password" class="input" data-type="password"/>
+                        </div>
+                        <div class="group">
+                            <input id="check" type="checkbox" class="check" checked="checked"/>
+                            <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                        </div>
+                        <div class="group">
+                            <input type="button" class="button" value="Sign In" id="signInButton"/>
+                        </div>
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                            <label><a href="#forgot">Forgot Password?</a></label>
+                        </div>
+                    </div>
+                    <div class="sign-up-htm">
+                        <div class="group">
+                            <label for="sign-up-username-field" class="label">用户名Username</label>
+                            <input id="sign-up-username-field" type="text" class="input"/>
+                        </div>
+                        <div class="group">
+                            <label for="sign-up-password-field" class="label">请输入密码 Password</label>
+                            <input id="sign-up-password-field" type="password" class="input" data-type="password"/>
+                        </div>
+                        <div class="group">
+                            <label for="sign-up-confirmPassword-field" class="label">确认密码 Repeat Password</label>
+                            <input id="sign-up-confirmPassword-field" type="password" class="input" data-type="password"/>
+                        </div>
+                        <div class="group">
+                            <label for="sign-up-email-field" class="label">电子邮箱 Email Address</label>
+                            <input id="sign-up-email-field" type="text" class="input"/>
+                        </div>
+                        <div class="group">
+                            <label for="sign-up-validation-field" class="label">验证码</label>
+                            <input id="sign-up-validation-field" type="text" class="input" style="width:60%;display:inline;margin-right:25px;"/>
+                            <input type="button" class="button" value="获取验证码" id="getValidationButton" style="width: 30%;display:inline;"/>
+                        </div>
+                        <div class="group">
+                            <input type="button" class="button" value="Sign Up" id="signUpButton"/>
+                        </div>
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                            <label for="tab-1"><a>Already Member?</a></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--支付模态框-->
+<div class="modal fade" id="payModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="https://img.alicdn.com/tps/TB17ghmIFXXXXXAXFXXXXXXXXXX.png" width="70px" height="25px"
+                             style="margin: 25px 0 0 60px;"/>
+                    </div>
+                    <div class="col-md-10">
+                        <h4>订单支付</h4>
+                    </div>
+                    <div class="col-md-5 col-md-offset-1">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <!--几个必要的部分：支付宝账号、密码、确认支付按钮、剩余支付时间、-->
+
+                    <div class="col-md-12">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="payUsernameField">账号</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" id="payUsernameField" placeholder="支付宝账号"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">密码</label>
+                                <div class="col-md-10">
+                                    <input type="password" class="form-control" id="payPasswordField" placeholder="支付宝密码"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-2">
+                        <h4>实际支付金额: <span class="text-danger" id="realPayNum"></span></h4>
+                    </div>
+                    <!--<div class="col-md-3 col-md-offset-2">-->
+                        <!--<p>订单总额: <span class="text-muted" id="totalPayNum"></span></p>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-7">-->
+                        <!--<p>系统自动使用最高减免优惠券: <span class="text-primary" id="couponBlock"></span></p>-->
+                    <!--</div>-->
+                </div>
+                <div class="row">
+                    <div class="col-md-5 col-md-offset-2">
+                        <h4>订单支付剩余时间<span id="leftTimeField" class="text-danger"></span></h4>
+                    </div>
+                    <div class="col-md-4 col-md-offset-1">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelButton">取消支付</button>
+                <button type="button" class="btn btn-primary" id="payNowButton">立即支付</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</body>
+<script th:src="@{/js/jQuery/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/css/bootstrap-3.3.7/dist/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/myJs/UtilJs.js}"></script>
+<script th:src="@{/js/myJs/NavigationJs.js}"></script>
+<script th:src="@{/js/myJs/ShowWarningsAlertJS.js}"></script>
+<script th:src="@{/js/myJs/LoginModalJs.js}"></script>
+<script th:src="@{/js/myJs/PersonalCenterPageJs.js}"></script>
+</html>
